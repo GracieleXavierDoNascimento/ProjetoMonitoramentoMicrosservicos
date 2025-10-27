@@ -44,7 +44,7 @@ def get_services_status():
             services_status.append({
                 'name': service,
                 'status': 'down',
-                'error': str(e),
+                'error': 'Service unavailable',
                 'timestamp': time.time()
             })
     
@@ -85,7 +85,7 @@ def query_range():
         )
         return jsonify(response.json())
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'Failed to query metrics range'}), 500
 
 @app.route('/api/alerts', methods=['GET', 'POST'])
 def handle_alerts():
@@ -128,7 +128,7 @@ def get_active_alerts():
         response = requests.get(f'{PROMETHEUS_URL}/api/v1/alerts')
         return jsonify(response.json())
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'Failed to get active alerts'}), 500
 
 @app.route('/api/alerts/rules')
 def get_alert_rules():
@@ -137,7 +137,7 @@ def get_alert_rules():
         response = requests.get(f'{PROMETHEUS_URL}/api/v1/rules')
         return jsonify(response.json())
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'Failed to get alert rules'}), 500
 
 @app.route('/metrics')
 def metrics():
