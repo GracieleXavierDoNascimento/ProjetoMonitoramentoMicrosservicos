@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 
-SERVICE_NAME = os.getenv('SERVICE_name', 'service-a')
+SERVICE_NAME = os.getenv('SERVICE_NAME', 'service-a')
 PORT = int(os.getenv('PORT', 5000))
 
 # Prometheus metrics
