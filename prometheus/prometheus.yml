@@ -1,0 +1,43 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'microservices-monitor'
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+rule_files:
+  - '/etc/prometheus/alerts.yml'
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'service-a'
+    static_configs:
+      - targets: ['service-a:5000']
+        labels:
+          service: 'service-a'
+
+  - job_name: 'service-b'
+    static_configs:
+      - targets: ['service-b:5001']
+        labels:
+          service: 'service-b'
+
+  - job_name: 'service-c'
+    static_configs:
+      - targets: ['service-c:5002']
+        labels:
+          service: 'service-c'
+
+  - job_name: 'dashboard'
+    static_configs:
+      - targets: ['dashboard:8080']
+        labels:
+          service: 'dashboard'

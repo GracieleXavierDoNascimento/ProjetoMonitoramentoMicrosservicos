@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microservices Monitoring Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 Microservices Monitoring Dashboard</h1>
+            <p class="subtitle">Real-time monitoring and alerting system</p>
+        </header>
+
+        <div class="nav-links">
+            <a href="http://localhost:9090" target="_blank" class="nav-link">📊 Prometheus</a>
+            <a href="http://localhost:3000" target="_blank" class="nav-link">📈 Grafana</a>
+            <a href="http://localhost:9093" target="_blank" class="nav-link">🔔 AlertManager</a>
+        </div>
+
+        <section class="services-section">
+            <h2>Services Status</h2>
+            <div id="services-status" class="services-grid">
+                <div class="loading">Loading services...</div>
+            </div>
+        </section>
+
+        <section class="metrics-section">
+            <h2>System Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h3>Average CPU Usage</h3>
+                    <div id="avg-cpu" class="metric-value">--</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Average Memory Usage</h3>
+                    <div id="avg-memory" class="metric-value">--</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Total Requests (5m)</h3>
+                    <div id="total-requests" class="metric-value">--</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Active Alerts</h3>
+                    <div id="active-alerts-count" class="metric-value">--</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="alerts-section">
+            <h2>Recent Alerts</h2>
+            <div id="alerts-container" class="alerts-container">
+                <div class="loading">Loading alerts...</div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Quick Actions</h2>
+            <div class="actions-grid">
+                <button onclick="refreshData()" class="action-btn">🔄 Refresh Data</button>
+                <button onclick="clearAlerts()" class="action-btn">🗑️ Clear Alerts</button>
+                <button onclick="testServices()" class="action-btn">🧪 Test Services</button>
+            </div>
+        </section>
+
+        <footer>
+            <p>Last updated: <span id="last-update">--</span></p>
+            <p>Auto-refresh every 5 seconds</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
