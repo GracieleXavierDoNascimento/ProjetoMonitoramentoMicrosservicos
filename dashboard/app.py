@@ -62,7 +62,7 @@ def query_metrics():
         )
         return jsonify(response.json())
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'Failed to query metrics'}), 500
 
 @app.route('/api/metrics/range', methods=['POST'])
 def query_range():
