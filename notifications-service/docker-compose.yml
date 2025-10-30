@@ -1,0 +1,11 @@
+  notifications-service:
+    build:
+      context: ./notifications-service
+    container_name: notifications_service
+    command: ["npm", "start"]
+    environment:
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5673/
+    depends_on:
+      - rabbitmq
+    networks:
+      - reservasnet

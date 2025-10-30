@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  # 🐘 Banco de dados PostgreSQL
+  postgres:
+    image: postgres:15
+    container_name: postgres_reservas
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: reservasdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - reservas-network
+
+  # 🐇 RabbitMQ com painel de gerenciamento
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq_reservas
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: senha
+      RABBITMQ_DEFAULT_VHOST: reservas
+    ports:
+      - "5673:5672"    # porta de comunicação
+      - "15673:15672"  # painel de controle web
+    networks:
+      - reservas-network
+
+  # 🧰 Adminer para gerenciar o banco via navegador
+  adminer:
+    image: adminer
+    container_name: adminer_reservas
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - reservas-network
+
+volumes:
+  postgres_data:
+
+networks:
+  reservas-network:
+    driver: bridge
